@@ -11,7 +11,9 @@
 namespace think\testing;
 
 use think\App;
+use think\Config;
 use think\Cookie;
+use think\helper\Arr;
 use think\helper\Str;
 use think\Request;
 use think\Response;
@@ -80,12 +82,93 @@ trait CrawlerTrait
     }
 
 
-    public function seeJson()
+    public function seeJson($data = null, $negate = false)
     {
-        $this->assertJson(
-            $this->response->getContent(), "JSON was not returned from [{$this->currentUri}]."
-        );
+        if (is_null($data)) {
+            $this->assertJson(
+                $this->response->getContent(), "JSON was not returned from [{$this->currentUri}]."
+            );
 
+            return $this;
+        }
+
+        return $this->seeJsonContains($data, $negate);
+    }
+
+    public function seeJsonEquals(array $data)
+    {
+        $actual = json_encode(Arr::sortRecursive(
+            json_decode($this->response->getContent(), true)
+        ));
+
+        $this->assertEquals(json_encode(Arr::sortRecursive($data)), $actual);
+
+        return $this;
+    }
+
+    protected function seeJsonContains(array $data, $negate = false)
+    {
+        $method = $negate ? 'assertFalse' : 'assertTrue';
+
+        $actual = json_decode($this->response->getContent(), true);
+
+        if (is_null($actual) || $actual === false) {
+            return $this->fail('Invalid JSON was returned from the route. Perhaps an exception was thrown?');
+        }
+
+        $actual = json_encode(Arr::sortRecursive(
+            (array)$actual
+        ));
+
+        foreach (Arr::sortRecursive($data) as $key => $value) {
+            $expected = $this->formatToExpectedJson($key, $value);
+
+            $this->{$method}(
+                Str::contains($actual, $expected),
+                ($negate ? 'Found unexpected' : 'Unable to find') . " JSON fragment [{$expected}] within [{$actual}]."
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Format the given key and value into a JSON string for expectation checks.
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @return string
+     */
+    protected function formatToExpectedJson($key, $value)
+    {
+        $expected = json_encode([$key => $value]);
+
+        if (Str::startsWith($expected, '{')) {
+            $expected = substr($expected, 1);
+        }
+
+        if (Str::endsWith($expected, '}')) {
+            $expected = substr($expected, 0, -1);
+        }
+
+        return $expected;
+    }
+
+    protected function seeModule($module)
+    {
+        $this->assertEquals($module, request()->module());
+        return $this;
+    }
+
+    protected function seeController($controller)
+    {
+        $this->assertEquals($controller, request()->controller());
+        return $this;
+    }
+
+    protected function seeAction($action)
+    {
+        $this->assertEquals($action, request()->action());
         return $this;
     }
 
@@ -93,7 +176,6 @@ trait CrawlerTrait
     protected function seeStatusCode($status)
     {
         $this->assertEquals($status, $this->response->getCode());
-
         return $this;
     }
 
