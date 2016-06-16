@@ -15,9 +15,4 @@ use PHPUnit_Framework_TestCase;
 abstract class TestCase extends PHPUnit_Framework_TestCase
 {
     use ApplicationTrait, AssertionsTrait, CrawlerTrait;
-
-    public function setUp()
-    {
-
-    }
 }

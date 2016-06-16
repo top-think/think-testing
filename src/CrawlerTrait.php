@@ -13,6 +13,8 @@ namespace think\testing;
 use think\App;
 use think\Config;
 use think\Cookie;
+use think\Error;
+use think\Exception;
 use think\helper\Arr;
 use think\helper\Str;
 use think\Request;
@@ -75,8 +77,13 @@ trait CrawlerTrait
             $this->currentUri, $method, $parameters,
             $cookies, $files, array_replace($this->serverVariables, $server)
         );
-
-        $response = App::run($request);
+        try {
+            $response = App::run($request);
+        } catch (Exception $e) {
+            $response = Error::getExceptionHandler()->render($e);
+        } catch (\Throwable $e) {
+            $response = Error::getExceptionHandler()->render($e);
+        }
 
         return $this->response = $response;
     }
