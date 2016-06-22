@@ -28,8 +28,8 @@ class Test extends Command
 
     public function execute(Input $input, Output $output)
     {
-        Loader::addMap('TestCase', ROOT_PATH . 'tests/TestCase.php');
-        Loader::addMap('think\App', CORE_PATH . 'App' . EXT);
+        Loader::addClassMap('TestCase', ROOT_PATH . 'tests/TestCase.php');
+        Loader::addClassMap('think\App', CORE_PATH . 'App' . EXT);
 
         Session::init();
         (new PHPUnit_TextUI_Command())->run(['phpunit']);
