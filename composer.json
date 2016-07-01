@@ -10,8 +10,8 @@
     "minimum-stability": "dev",
     "require": {
         "topthink/think-helper": "*",
-        "phpunit/phpunit": "^5.4",
-        "symfony/dom-crawler": "^3.0.7"
+        "phpunit/phpunit": "^4.8.26",
+        "symfony/dom-crawler": "^2.8.8"
     },
     "autoload": {
         "psr-4": {
