@@ -23,7 +23,7 @@ class Test extends Command
 {
     public function configure()
     {
-        $this->setName('test')->setDescription('phpunit');
+        $this->setName('test:run')->setDescription('phpunit');
     }
 
     public function execute(Input $input, Output $output)
