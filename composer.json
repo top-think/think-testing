@@ -1,6 +1,7 @@
 {
     "name": "topthink/think-testing",
     "license": "Apache-2.0",
+    "type": "think-testing",
     "authors": [
         {
             "name": "yunwuxin",
@@ -9,6 +10,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
+        "topthink/think-installer": "*",
         "topthink/think-helper": "*",
         "phpunit/phpunit": "^4.8.26",
         "symfony/dom-crawler": "^2.8.8"
