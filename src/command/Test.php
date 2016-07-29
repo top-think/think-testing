@@ -23,7 +23,7 @@ class Test extends Command
 {
     public function configure()
     {
-        $this->setName('test:run')->setDescription('phpunit');
+        $this->setName('unit')->setDescription('phpunit')->ignoreValidationErrors();
     }
 
     public function execute(Input $input, Output $output)
@@ -32,6 +32,12 @@ class Test extends Command
         Loader::addClassMap('think\App', CORE_PATH . 'App' . EXT);
 
         Session::init();
-        (new PHPUnit_TextUI_Command())->run(['phpunit']);
+        $argv = $_SERVER['argv'];
+        array_shift($argv);
+        array_shift($argv);
+        array_unshift($argv,'phpunit');
+
+        (new PHPUnit_TextUI_Command())->run($argv);
     }
+
 }
