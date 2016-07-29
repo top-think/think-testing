@@ -8,7 +8,6 @@
             "email": "448901948@qq.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "topthink/think-installer": "*",
         "topthink/think-helper": "*",
