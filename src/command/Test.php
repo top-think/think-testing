@@ -28,8 +28,8 @@ class Test extends Command
 
     public function execute(Input $input, Output $output)
     {
-        Loader::addClassMap('TestCase', ROOT_PATH . 'tests/TestCase.php');
-        Loader::addClassMap('think\App', CORE_PATH . 'App' . EXT);
+        //注册命名空间
+        Loader::addNamespace('tests', ROOT_PATH . 'tests');
 
         Session::init();
         $argv = $_SERVER['argv'];
