@@ -11,14 +11,14 @@
 
 namespace think\testing\command;
 
-
 use PHPUnit_TextUI_Command;
 use PHPUnit_Util_Blacklist;
 use think\console\Command;
 use think\console\Input;
 use think\console\Output;
+use think\facade\Env;
+use think\facade\Session;
 use think\Loader;
-use think\Session;
 
 class Test extends Command
 {
@@ -30,7 +30,7 @@ class Test extends Command
     public function execute(Input $input, Output $output)
     {
         //注册命名空间
-        Loader::addNamespace('tests', ROOT_PATH . 'tests');
+        Loader::addNamespace('tests', Env::get('root_path') . 'tests');
 
         Session::init();
         $argv = $_SERVER['argv'];

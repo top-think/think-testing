@@ -10,10 +10,10 @@
 // +----------------------------------------------------------------------
 namespace think\testing;
 
-use think\response\View;
 use PHPUnit_Framework_Assert as PHPUnit;
-use think\Session;
-use think\Url;
+use think\facade\Session;
+use think\facade\Url;
+use think\response\View;
 
 trait AssertionsTrait
 {

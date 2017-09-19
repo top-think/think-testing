@@ -12,14 +12,14 @@ namespace think\testing;
 
 use Exception;
 use InvalidArgumentException;
+use PHPUnit_Framework_ExpectationFailedException as PHPUnitException;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\Form;
+use think\facade\Request;
+use think\facade\Url;
 use think\File;
 use think\helper\Str;
-use think\Request;
 use think\response\Redirect;
-use PHPUnit_Framework_ExpectationFailedException as PHPUnitException;
-use think\Url;
 
 trait InteractsWithPages
 {
@@ -46,14 +46,12 @@ trait InteractsWithPages
         return $this->makeRequest('GET', $uri);
     }
 
-
     protected function submitForm($buttonText, $inputs = [], $uploads = [])
     {
         $this->makeRequestUsingForm($this->fillForm($buttonText, $inputs), $uploads);
 
         return $this;
     }
-
 
     protected function see($text, $negate = false)
     {
@@ -64,7 +62,7 @@ trait InteractsWithPages
         $escapedPattern = preg_quote(htmlentities($text, ENT_QUOTES, 'UTF-8', false), '/');
 
         $pattern = $rawPattern == $escapedPattern
-            ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
+        ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
 
         $this->$method("/$pattern/i", $this->response->getContent());
 
@@ -99,7 +97,6 @@ trait InteractsWithPages
 
         return $this;
     }
-
 
     public function seeLink($text, $url = null)
     {
@@ -138,7 +135,7 @@ trait InteractsWithPages
         // If the URL is null, we assume the developer only wants to find a link
         // with the given text regardless of the URL. So, if we find the link
         // we will return true now. Otherwise, we look for the given URL.
-        if ($url == null) {
+        if (null == $url) {
             return true;
         }
 
@@ -244,11 +241,11 @@ trait InteractsWithPages
 
         $element = $field->nodeName();
 
-        if ($element == 'select') {
+        if ('select' == $element) {
             return $this->getSelectedValueFromSelect($field);
         }
 
-        if ($element == 'input') {
+        if ('input' == $element) {
             return $this->getCheckedValueFromRadioGroup($field);
         }
 
@@ -344,11 +341,11 @@ trait InteractsWithPages
 
         $element = $field->nodeName();
 
-        if ($element == 'input') {
+        if ('input' == $element) {
             return $field->attr('value');
         }
 
-        if ($element == 'textarea') {
+        if ('textarea' == $element) {
             return $field->text();
         }
 
@@ -375,7 +372,7 @@ trait InteractsWithPages
         $escapedPattern = preg_quote(htmlentities($text, ENT_QUOTES, 'UTF-8', false), '/');
 
         $pattern = $rawPattern == $escapedPattern
-            ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
+        ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
 
         foreach ($elements as $element) {
             $element = new Crawler($element);
@@ -475,7 +472,6 @@ trait InteractsWithPages
         );
     }
 
-
     protected function assertPageLoaded($uri, $message = null)
     {
         $status = $this->response->getCode();
@@ -489,7 +485,6 @@ trait InteractsWithPages
         }
     }
 
-
     protected function convertUploadsForTesting(Form $form, array $uploads)
     {
         $files = $form->getFiles();
@@ -498,8 +493,8 @@ trait InteractsWithPages
 
         $files = array_map(function (array $file, $name) use ($uploads) {
             return isset($uploads[$name])
-                ? $this->getUploadedFileForTesting($file, $uploads, $name)
-                : $file;
+            ? $this->getUploadedFileForTesting($file, $uploads, $name)
+            : $file;
         }, $files, $names);
 
         return array_combine($names, $files);

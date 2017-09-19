@@ -11,7 +11,7 @@
 namespace think\testing;
 
 use think\Db;
-use think\Session;
+use think\facade\Session;
 
 trait ApplicationTrait
 {
@@ -27,7 +27,6 @@ trait ApplicationTrait
     {
         Session::clear();
     }
-
 
     protected function seeInDatabase($table, array $data)
     {
