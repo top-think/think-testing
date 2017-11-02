@@ -69,7 +69,7 @@ trait CrawlerTrait
     }
 
 
-    public function call($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
+    public function call($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null, $header = [])
     {
         $this->currentUri = $this->prepareUrlForRequest($uri);
 
@@ -77,6 +77,9 @@ trait CrawlerTrait
             $this->currentUri, $method, $parameters,
             $cookies, $files, array_replace($this->serverVariables, $server)
         );
+        if (!empty($header)) {
+            $request->header($header);
+        }
         try {
             $response = App::run($request);
         } catch (Exception $e) {
