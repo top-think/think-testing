@@ -451,11 +451,11 @@ trait InteractsWithPages
         return $this->crawler->filter(implode(', ', $elements));
     }
 
-    protected function makeRequest($method, $uri, $parameters = [], $cookies = [], $files = [])
+    protected function makeRequest($method, $uri, $parameters = [], $cookies = [], $files = [], $header = [])
     {
         $uri = $this->prepareUrlForRequest($uri);
 
-        $this->call($method, $uri, $parameters, $cookies, $files);
+        $this->call($method, $uri, $parameters, $cookies, $files, [], null, $header);
 
         $this->clearInputs()->followRedirects()->assertPageLoaded($uri);
 
