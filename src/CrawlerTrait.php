@@ -14,7 +14,6 @@ use think\App;
 use think\Config;
 use think\Cookie;
 use think\Error;
-use think\Exception;
 use think\helper\Arr;
 use think\helper\Str;
 use think\Request;
@@ -82,7 +81,7 @@ trait CrawlerTrait
         }
         try {
             $response = App::run($request);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $response = Error::getExceptionHandler()->render($e);
         } catch (\Throwable $e) {
             $response = Error::getExceptionHandler()->render($e);
