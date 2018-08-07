@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 namespace think\testing;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase as PHPUnit_Framework_TestCase;
 
 abstract class TestCase extends PHPUnit_Framework_TestCase
 {

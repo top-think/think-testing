@@ -12,8 +12,8 @@
 namespace think\testing\command;
 
 
-use PHPUnit_TextUI_Command;
-use PHPUnit_Util_Blacklist;
+use PHPUnit\TextUI\Command as PHPUnit_TextUI_Command;
+use PHPUnit\Util\Blacklist as PHPUnit_Util_Blacklist;
 use think\console\Command;
 use think\console\Input;
 use think\console\Output;
