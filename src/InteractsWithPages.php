@@ -18,7 +18,7 @@ use think\File;
 use think\helper\Str;
 use think\Request;
 use think\response\Redirect;
-use PHPUnit_Framework_ExpectationFailedException as PHPUnitException;
+use PHPUnit\Framework\ExpectationFailedException;
 use think\Url;
 
 trait InteractsWithPages
@@ -482,7 +482,7 @@ trait InteractsWithPages
 
         try {
             $this->assertEquals(200, $status);
-        } catch (PHPUnitException $e) {
+        } catch (ExpectationFailedException $e) {
             $message = $message ?: "A request to [{$uri}] failed. Received status code [{$status}].";
 
             throw new HttpException($message);

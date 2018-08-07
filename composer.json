@@ -10,13 +10,26 @@
     ],
     "require": {
         "topthink/think-installer": "~1.0",
+        "topthink/framework": "5.1.*",
         "topthink/think-helper": "~1.0",
-        "phpunit/phpunit": "^4.8.26",
-        "symfony/dom-crawler": "^2.8.8"
+        "symfony/dom-crawler": "4.1.1",
+        "phpunit/phpunit": "7.2.7"
+    },
+    "config": {
+        "bin-dir":"bin",
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests"
+        }
     },
     "autoload": {
         "psr-4": {
-            "think\\testing\\": "src"
+            "think\\testing\\": "src",
         },
         "files": [
             "src/config.php"

@@ -11,7 +11,7 @@
 namespace think\testing;
 
 use think\response\View;
-use PHPUnit_Framework_Assert as PHPUnit;
+use PHPUnit\Framework\Assert as PHPUnit;
 use think\Session;
 use think\Url;
 
