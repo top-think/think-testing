@@ -12,7 +12,7 @@ namespace think\testing;
 
 use Exception;
 use InvalidArgumentException;
-use PHPUnit_Framework_ExpectationFailedException as PHPUnitException;
+use PHPUnit\Framework\ExpectationFailedException as PHPUnitException;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\Form;
 use think\facade\Request;

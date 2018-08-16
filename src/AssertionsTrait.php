@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 namespace think\testing;
 
-use PHPUnit_Framework_Assert as PHPUnit;
+use PHPUnit\Framework\Assert as PHPUnit;
 use think\facade\Session;
 use think\facade\Url;
 use think\response\View;
