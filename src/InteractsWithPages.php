@@ -12,7 +12,7 @@ namespace think\testing;
 
 use Exception;
 use InvalidArgumentException;
-use PHPUnit_Framework_ExpectationFailedException as PHPUnitException;
+use PHPUnit\Framework\ExpectationFailedException as PHPUnitException;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\DomCrawler\Form;
 use think\facade\Request;
@@ -456,7 +456,7 @@ trait InteractsWithPages
 
         $this->clearInputs()->followRedirects()->assertPageLoaded($uri);
 
-        $this->currentUri = Request::instance()->url(true);
+        $this->currentUri = Request::url(true);
 
         $this->crawler = new Crawler($this->response->getContent(), $this->currentUri);
 
