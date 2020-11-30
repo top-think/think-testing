@@ -9,10 +9,9 @@
         }
     ],
     "require": {
-        "topthink/think-installer": "~1.0",
-        "topthink/think-helper": "~1.0",
         "phpunit/phpunit": "^4.8.26",
-        "symfony/dom-crawler": "^2.8.8"
+        "symfony/dom-crawler": "^2.8.8",
+        "topthink/framework": "5.1.*",
     },
     "autoload": {
         "psr-4": {
