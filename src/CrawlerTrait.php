@@ -20,6 +20,7 @@ use think\facade\Response;
 use think\facade\Route;
 use think\helper\Arr;
 use think\helper\Str;
+use think\response\View;
 
 trait CrawlerTrait
 {
@@ -80,6 +81,9 @@ trait CrawlerTrait
         try {
             Route::setRequest($request);
             $response = App::bindTo('request', $request)->run();
+            if ($response instanceof View) {
+                $this->crawler = new \Symfony\Component\DomCrawler\Crawler($response->getContent(), $this->currentUri);
+            }
         } catch (Exception $e) {
             $response = Error::getExceptionHandler()->render($e);
         } catch (\Throwable $e) {
